@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/md.codefactory.user-services.iml" filepath="$PROJECT_DIR$/.idea/modules/md.codefactory.user-services.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/md.codefactory.user-services.main.iml" filepath="$PROJECT_DIR$/.idea/modules/md.codefactory.user-services.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/md.codefactory.user-services.test.iml" filepath="$PROJECT_DIR$/.idea/modules/md.codefactory.user-services.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/user-service.iml" filepath="$PROJECT_DIR$/user-service.iml" />
     </modules>
   </component>
 </project>
