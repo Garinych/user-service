@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @Data
@@ -15,24 +17,31 @@ public class User {
     @SequenceGenerator(name = "users_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
     @Column(name = "id")
-    Long id;
+    private Long id;
 
     @Column(name = "first_name")
-    String firstName;
+    private String firstName;
 
     @Column(name = "lastName")
-    String lastName;
+    private String lastName;
 
     @Column(name = "email")
-    String email;
+    private String email;
 
     @Column(name = "phone_number")
-    Integer phoneNumber;
+    private Integer phoneNumber;
 
     @Column(name = "username")
-    String username;
+    private String username;
 
     @Column(name = "password")
-    String password;
+    private String password;
+
+    @Column(name = "role")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> role = new HashSet<>();
 
 }

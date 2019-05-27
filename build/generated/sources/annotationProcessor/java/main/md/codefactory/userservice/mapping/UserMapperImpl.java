@@ -1,7 +1,13 @@
 package md.codefactory.userservice.mapping;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.annotation.Generated;
+import md.codefactory.userservice.domain.Role;
 import md.codefactory.userservice.domain.User;
+import md.codefactory.userservice.mapping.dto.AdminUserDto;
 import md.codefactory.userservice.mapping.dto.NewUserDto;
 import md.codefactory.userservice.mapping.dto.UpdateUserDto;
 import md.codefactory.userservice.mapping.dto.UserProfileDto;
@@ -9,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-05-22T10:41:34+0300",
+    date = "2019-05-27T10:33:25+0300",
     comments = "version: 1.3.0.Final, compiler: javac, environment: Java 11.0.1 (Oracle Corporation)"
 )
 @Component
@@ -123,6 +129,76 @@ public class UserMapperImpl implements UserMapper {
 
         UserProfileDto userProfileDto = new UserProfileDto();
 
+        userProfileDto.setFirstName( user.getFirstName() );
+        userProfileDto.setLastName( user.getLastName() );
+        userProfileDto.setEmail( user.getEmail() );
+        if ( user.getPhoneNumber() != null ) {
+            userProfileDto.setPhoneNumber( String.valueOf( user.getPhoneNumber() ) );
+        }
+        userProfileDto.setUsername( user.getUsername() );
+        userProfileDto.setPassword( user.getPassword() );
+
         return userProfileDto;
+    }
+
+    @Override
+    public User adminUserDtoToUser(AdminUserDto adminUserDto) {
+        if ( adminUserDto == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setFirstName( adminUserDto.getFirstName() );
+        user.setLastName( adminUserDto.getLastName() );
+        user.setEmail( adminUserDto.getEmail() );
+        if ( adminUserDto.getPhoneNumber() != null ) {
+            user.setPhoneNumber( Integer.parseInt( adminUserDto.getPhoneNumber() ) );
+        }
+        user.setUsername( adminUserDto.getUsername() );
+        user.setPassword( adminUserDto.getPassword() );
+        List<Role> list = adminUserDto.getRole();
+        if ( list != null ) {
+            user.setRole( new HashSet<Role>( list ) );
+        }
+
+        return user;
+    }
+
+    @Override
+    public List<AdminUserDto> userToAdminUserDto(List<User> user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        List<AdminUserDto> list = new ArrayList<AdminUserDto>( user.size() );
+        for ( User user1 : user ) {
+            list.add( userToAdminUserDto( user1 ) );
+        }
+
+        return list;
+    }
+
+    protected AdminUserDto userToAdminUserDto(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        AdminUserDto adminUserDto = new AdminUserDto();
+
+        adminUserDto.setFirstName( user.getFirstName() );
+        adminUserDto.setLastName( user.getLastName() );
+        adminUserDto.setEmail( user.getEmail() );
+        if ( user.getPhoneNumber() != null ) {
+            adminUserDto.setPhoneNumber( String.valueOf( user.getPhoneNumber() ) );
+        }
+        adminUserDto.setUsername( user.getUsername() );
+        adminUserDto.setPassword( user.getPassword() );
+        Set<Role> set = user.getRole();
+        if ( set != null ) {
+            adminUserDto.setRole( new ArrayList<Role>( set ) );
+        }
+
+        return adminUserDto;
     }
 }
