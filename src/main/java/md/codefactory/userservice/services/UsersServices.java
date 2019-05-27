@@ -36,9 +36,9 @@ public class UsersServices {
         return usersRepository.save(user);
     }
 
-    public User updateUser(String username, User user) throws EmailAlreadyExistException, PhoneNumberAlreadyExistException, UsernameAlreadyExistException, ProfileNotFountException {
-        User updatedUser = usersRepository.findByUsername(username)
-                .orElseThrow(() -> new ProfileNotFountException("User with username = " + username + " not found!"));
+    public User updateUser(Long id, User user) throws EmailAlreadyExistException, PhoneNumberAlreadyExistException, UsernameAlreadyExistException, ProfileNotFountException {
+        User updatedUser = usersRepository.findById(id)
+                .orElseThrow(() -> new ProfileNotFountException("User with id = " + id + " not found!"));
 
         updatedUser.setFirstName(user.getFirstName());
         updatedUser.setLastName(user.getLastName());
