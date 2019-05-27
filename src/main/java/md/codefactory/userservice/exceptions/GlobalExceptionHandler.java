@@ -42,4 +42,11 @@ public class GlobalExceptionHandler {
         responce.put(errorMessage, e.getMessage());
         return new ResponseEntity<>(responce, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler({NotEnoughtRightsException.class})
+    public ResponseEntity<Map<String,String>> emailAlreadyExist(NotEnoughtRightsException e){
+        Map<String,String> responce = new HashMap<>();
+        responce.put(errorMessage, e.getMessage());
+        return new ResponseEntity<>(responce, HttpStatus.BAD_REQUEST);
+    }
 }

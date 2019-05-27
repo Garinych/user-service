@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import md.codefactory.userservice.domain.Role;
 import md.codefactory.userservice.domain.User;
 import md.codefactory.userservice.domain.enums.RoleName;
+import md.codefactory.userservice.exceptions.NotEnoughtRightsException;
 import md.codefactory.userservice.exceptions.ProfileNotFountException;
 import md.codefactory.userservice.mapping.UserMapper;
 import md.codefactory.userservice.mapping.dto.AdminUserDto;
@@ -47,7 +48,7 @@ public class AdminUsersController {
             List<User> user = usersRepository.findAll();
             return userMapper.userToAdminUserDto(user);
         } else {
-            throw new Exception("Not enought rights !");
+            throw new NotEnoughtRightsException("Not enought rights !");
         }
 
     }
