@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Getter
@@ -13,10 +14,12 @@ public class UpdateUserDto {
 
     @NotBlank
     @Size(min = 3, max = 20, message = "First name length mast be min - 3 , max - 20 !")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contains only letters")
     String firstName;
 
     @NotBlank
     @Size(min = 3, max = 20, message = "Last name length mast be min - 3 , max - 20 !")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contains only letters")
     String lastName;
 
     @NotBlank
