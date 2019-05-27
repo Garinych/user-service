@@ -11,6 +11,8 @@ import java.util.Set;
 @Setter
 public class AdminUserDto {
 
+    String id;
+
     String firstName;
 
     String lastName;
