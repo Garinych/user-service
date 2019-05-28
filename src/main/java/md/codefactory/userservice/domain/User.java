@@ -29,7 +29,7 @@ public class User {
     private String email;
 
     @Column(name = "phone_number")
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "username")
     private String username;

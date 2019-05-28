@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class UserProfileDto {
 
-
     String firstName;
 
     String lastName;

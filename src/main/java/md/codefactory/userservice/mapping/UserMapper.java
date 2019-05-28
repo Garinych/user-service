@@ -7,8 +7,6 @@ import md.codefactory.userservice.mapping.dto.UpdateUserDto;
 import md.codefactory.userservice.mapping.dto.UserProfileDto;
 import org.mapstruct.Mapper;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
@@ -26,5 +24,5 @@ public interface UserMapper {
 
     User adminUserDtoToUser(AdminUserDto adminUserDto);
 
-    List<AdminUserDto> userToAdminUserDto(List<User> user);
+    AdminUserDto userToAdminUserDto(User user);
 }

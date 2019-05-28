@@ -2,14 +2,14 @@ package md.codefactory.userservice.mapping.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import md.codefactory.userservice.domain.Role;
 
-import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 public class AdminUserDto {
+
+    String id;
 
     String firstName;
 
@@ -23,5 +23,5 @@ public class AdminUserDto {
 
     String password;
 
-    List<Role> role;
+    Set<RoleDto> role;
 }
