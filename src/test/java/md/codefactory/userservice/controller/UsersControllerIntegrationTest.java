@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Sql(value = {"/sql-scripts/data.sql"})
@@ -50,7 +49,7 @@ public class UsersControllerIntegrationTest {
     }
 
     @Test
-    public void should_save_new_user() throws Exception{
+    public void should_save_new_user() throws Exception {
         User newUser = new User();
         newUser.setFirstName("Vasea");
         newUser.setLastName("Gliuck");
@@ -69,10 +68,10 @@ public class UsersControllerIntegrationTest {
     }
 
     @Test
-    public void should_show_user_profile() throws Exception{
+    public void should_show_user_profile() throws Exception {
 
         this.mockMvc.perform(get("/api/users/{id}", 1)
-            .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(get("/api/users/{id}", -1)

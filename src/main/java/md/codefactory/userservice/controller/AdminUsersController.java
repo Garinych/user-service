@@ -24,9 +24,9 @@ public class AdminUsersController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser (@PathVariable Long id) throws ProfileNotFountException {
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) throws ProfileNotFountException {
         User user = usersRepository.findById(id)
-                .orElseThrow(()-> new ProfileNotFountException("User with id = " + id + " not found!"));
+                .orElseThrow(() -> new ProfileNotFountException("User with id = " + id + " not found!"));
 
         usersRepository.delete(user);
 
@@ -35,7 +35,7 @@ public class AdminUsersController {
 
 
     @GetMapping
-    public Page<AdminUserDto> findAllUsers(Pageable pageable){
-            return usersRepository.findAll(pageable).map( user1-> userMapper.userToAdminUserDto(user1));
+    public Page<AdminUserDto> findAllUsers(Pageable pageable) {
+        return usersRepository.findAll(pageable).map(user1 -> userMapper.userToAdminUserDto(user1));
     }
 }

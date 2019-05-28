@@ -3,7 +3,8 @@ package md.codefactory.userservice.services;
 import md.codefactory.userservice.domain.Role;
 import md.codefactory.userservice.domain.User;
 import md.codefactory.userservice.domain.enums.RoleName;
-import md.codefactory.userservice.exceptions.*;
+import md.codefactory.userservice.exceptions.EntityAlreadyExistsException;
+import md.codefactory.userservice.exceptions.ProfileNotFountException;
 import md.codefactory.userservice.repository.RoleRepository;
 import md.codefactory.userservice.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,19 +56,19 @@ public class UsersServices {
 
         Long userId = user.getId();
 
-        if(existEmail.isPresent() && !existEmail.get().getId().equals(userId)){
+        if (existEmail.isPresent() && !existEmail.get().getId().equals(userId)) {
             throw new EntityAlreadyExistsException("Email " + user.getEmail() + " already exist !!!");
         }
 
         Optional<User> existPhoneNumber = usersRepository.findByPhoneNumber(user.getPhoneNumber());
 
-        if(existPhoneNumber.isPresent() && !existPhoneNumber.get().getId().equals(userId)){
+        if (existPhoneNumber.isPresent() && !existPhoneNumber.get().getId().equals(userId)) {
             throw new EntityAlreadyExistsException("Phone Number " + user.getPhoneNumber() + " already exist !!!");
         }
 
-        Optional<User> existUsername = usersRepository.findByUsername(user.getUsername() );
+        Optional<User> existUsername = usersRepository.findByUsername(user.getUsername());
 
-        if(existUsername.isPresent() && !existUsername.get().getId().equals(userId)){
+        if (existUsername.isPresent() && !existUsername.get().getId().equals(userId)) {
             throw new EntityAlreadyExistsException("Username " + user.getUsername() + " already exist !!!");
         }
     }

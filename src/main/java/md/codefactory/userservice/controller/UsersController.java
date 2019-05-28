@@ -2,7 +2,8 @@ package md.codefactory.userservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import md.codefactory.userservice.domain.User;
-import md.codefactory.userservice.exceptions.*;
+import md.codefactory.userservice.exceptions.EntityAlreadyExistsException;
+import md.codefactory.userservice.exceptions.ProfileNotFountException;
 import md.codefactory.userservice.mapping.UserMapper;
 import md.codefactory.userservice.mapping.dto.NewUserDto;
 import md.codefactory.userservice.mapping.dto.UpdateUserDto;
@@ -32,7 +33,7 @@ public class UsersController {
     public ResponseEntity<?> saveUser(@Valid @RequestBody NewUserDto newUserDto, BindingResult result) throws ProfileNotFountException, EntityAlreadyExistsException {
 
         ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
-        if(errorMap != null) return errorMap;
+        if (errorMap != null) return errorMap;
 
         User newUser = userMapper.newUserDtoToUser(newUserDto);
         usersServices.saveUser(newUser);
@@ -53,14 +54,12 @@ public class UsersController {
     public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserDto updateUserDto, BindingResult result) throws ProfileNotFountException, EntityAlreadyExistsException {
 
         ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
-        if(errorMap != null) return errorMap;
+        if (errorMap != null) return errorMap;
         User updateUser = userMapper.updateUserDtoToUser(updateUserDto);
         usersServices.updateUser(id, updateUser);
 
         return new ResponseEntity<>(userMapper.userToUpdateUserDto(updateUser), HttpStatus.OK);
     }
-
-
 
 
 }

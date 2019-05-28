@@ -46,17 +46,21 @@ public class AdminUsersControllerIntegrationTest {
 
     @Test
     public void should_find_all_users() throws Exception {
-        //user with Role ADMIN
-        this.mockMvc.perform(get("/api/admin/users/{username}", "dmitry1")
+
+        this.mockMvc.perform(get("/api/admin/users")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        //user with Role USER
-        this.mockMvc.perform(get("/api/admin/users/{username}", "vsea2")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("errorMessage", is("Not enought rights !")));
+    }
 
+    @Test
+    public void should_find_all_users_with_pagination() throws Exception {
+
+        this.mockMvc.perform(get("/api/admin/users?page=0&size5&sort=id,asc")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].id", is("1")))
+                .andExpect(jsonPath("$.content[4].id", is("5")));
     }
 
     @Test

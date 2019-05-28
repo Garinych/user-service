@@ -16,22 +16,22 @@ public class GlobalExceptionHandler {
     private String errorMessage = "errorMessage";
 
     @ExceptionHandler({EntityAlreadyExistsException.class})
-    public ResponseEntity<Map<String,String>> emailAlreadyExist(EntityAlreadyExistsException e){
-        Map<String,String> responce = new HashMap<>();
+    public ResponseEntity<Map<String, String>> emailAlreadyExist(EntityAlreadyExistsException e) {
+        Map<String, String> responce = new HashMap<>();
         responce.put(errorMessage, e.getMessage());
         return new ResponseEntity<>(responce, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler({ProfileNotFountException.class})
-    public ResponseEntity<Map<String,String>> emailAlreadyExist(ProfileNotFountException e){
-        Map<String,String> responce = new HashMap<>();
+    public ResponseEntity<Map<String, String>> emailAlreadyExist(ProfileNotFountException e) {
+        Map<String, String> responce = new HashMap<>();
         responce.put(errorMessage, e.getMessage());
         return new ResponseEntity<>(responce, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({NotEnoughtRightsException.class})
-    public ResponseEntity<Map<String,String>> emailAlreadyExist(NotEnoughtRightsException e){
-        Map<String,String> responce = new HashMap<>();
+    public ResponseEntity<Map<String, String>> emailAlreadyExist(NotEnoughtRightsException e) {
+        Map<String, String> responce = new HashMap<>();
         responce.put(errorMessage, e.getMessage());
         return new ResponseEntity<>(responce, HttpStatus.BAD_REQUEST);
     }

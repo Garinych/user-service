@@ -27,7 +27,7 @@ public class NewUserDto {
     String email;
 
     @NotBlank
-    @Size(min = 9 , max = 20, message = "Phone number size mast be min - 9, max - 20 and contains only Numbers !")
+    @Size(min = 9, max = 20, message = "Phone number size mast be min - 9, max - 20 and contains only Numbers !")
     String phoneNumber;
 
     @NotBlank
