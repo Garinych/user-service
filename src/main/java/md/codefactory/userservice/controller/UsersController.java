@@ -2,10 +2,7 @@ package md.codefactory.userservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import md.codefactory.userservice.domain.User;
-import md.codefactory.userservice.exceptions.EmailAlreadyExistException;
-import md.codefactory.userservice.exceptions.PhoneNumberAlreadyExistException;
-import md.codefactory.userservice.exceptions.ProfileNotFountException;
-import md.codefactory.userservice.exceptions.UsernameAlreadyExistException;
+import md.codefactory.userservice.exceptions.*;
 import md.codefactory.userservice.mapping.UserMapper;
 import md.codefactory.userservice.mapping.dto.NewUserDto;
 import md.codefactory.userservice.mapping.dto.UpdateUserDto;
@@ -32,7 +29,7 @@ public class UsersController {
     private final MapValidationErrorService mapValidationErrorService;
 
     @PostMapping
-    public ResponseEntity<?> saveUser(@Valid @RequestBody NewUserDto newUserDto, BindingResult result) throws UsernameAlreadyExistException, EmailAlreadyExistException, PhoneNumberAlreadyExistException, ProfileNotFountException {
+    public ResponseEntity<?> saveUser(@Valid @RequestBody NewUserDto newUserDto, BindingResult result) throws ProfileNotFountException, EntityAlreadyExistsException {
 
         ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
         if(errorMap != null) return errorMap;
@@ -53,7 +50,7 @@ public class UsersController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserDto updateUserDto, BindingResult result) throws UsernameAlreadyExistException, EmailAlreadyExistException, PhoneNumberAlreadyExistException, ProfileNotFountException {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserDto updateUserDto, BindingResult result) throws ProfileNotFountException, EntityAlreadyExistsException {
 
         ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
         if(errorMap != null) return errorMap;

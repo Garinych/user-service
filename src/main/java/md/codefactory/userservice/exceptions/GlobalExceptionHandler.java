@@ -15,22 +15,8 @@ public class GlobalExceptionHandler {
 
     private String errorMessage = "errorMessage";
 
-    @ExceptionHandler({EmailAlreadyExistException.class})
-    public ResponseEntity<Map<String,String>> emailAlreadyExist(EmailAlreadyExistException e){
-        Map<String,String> responce = new HashMap<>();
-        responce.put(errorMessage, e.getMessage());
-        return new ResponseEntity<>(responce, HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler({PhoneNumberAlreadyExistException.class})
-    public ResponseEntity<Map<String,String>> emailAlreadyExist(PhoneNumberAlreadyExistException e){
-        Map<String,String> responce = new HashMap<>();
-        responce.put(errorMessage, e.getMessage());
-        return new ResponseEntity<>(responce, HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler({UsernameAlreadyExistException.class})
-    public ResponseEntity<Map<String,String>> emailAlreadyExist(UsernameAlreadyExistException e){
+    @ExceptionHandler({EntityAlreadyExistsException.class})
+    public ResponseEntity<Map<String,String>> emailAlreadyExist(EntityAlreadyExistsException e){
         Map<String,String> responce = new HashMap<>();
         responce.put(errorMessage, e.getMessage());
         return new ResponseEntity<>(responce, HttpStatus.CONFLICT);

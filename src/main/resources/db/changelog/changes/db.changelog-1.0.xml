@@ -73,6 +73,32 @@
 
     </changeSet>
 
+    <changeSet author="dumitru-sandul" id="4">
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="id" value="1"/>
+            <column name="first_name" value="Dmitry"/>
+            <column name="last_name" value="Sandul"/>
+            <column name="email" value="dumitru.sandul@codefactory.com"/>
+            <column name="phone_number" value="069545454"/>
+            <column name="username" value="dumitru.sandul"/>
+            <column name="password" value="jora123"/>
+        </insert>
+
+        <insert tableName="user_roles">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+
+    </changeSet>
+
 
 
 </databaseChangeLog>

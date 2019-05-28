@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql(value = {"/sql-scripts/data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {"/sql-scripts/data.sql"})
 public class UsersRepositoryTest {
 
     @Autowired
@@ -42,15 +42,33 @@ public class UsersRepositoryTest {
     }
 
     @Test
-    public void find_by_phone_number() {
+    public void find_by_email_not_exists_test() {
+        Optional<User> actualUser = usersRepository.findByEmail("lisps@codefactory.com");
+        assertFalse(actualUser.isPresent());
+    }
+
+    @Test
+    public void find_by_phone_number_test() {
         Optional<User> actualUser = usersRepository.findByPhoneNumber("069545458");
         assertTrue(actualUser.isPresent());
     }
 
     @Test
-    public void find_by_username() {
+    public void find_by_phone_number_not_exists_test() {
+        Optional<User> actualUser = usersRepository.findByPhoneNumber("06954545845");
+        assertFalse(actualUser.isPresent());
+    }
+
+    @Test
+    public void find_by_username_test() {
         Optional<User> actualUser = usersRepository.findByUsername("petea4");
         assertTrue(actualUser.isPresent());
+    }
+
+    @Test
+    public void find_by_username_not_exists_test() {
+        Optional<User> actualUser = usersRepository.findByUsername("kirilev");
+        assertFalse(actualUser.isPresent());
     }
 
 }
