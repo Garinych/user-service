@@ -9,19 +9,18 @@ import java.util.Set;
 @Setter
 public class AdminUserDto {
 
-    String id;
+    private String id;
 
-    String firstName;
+    private String firstName;
+    private String lastName;
 
-    String lastName;
+    private String email;
 
-    String email;
+    private String phoneNumber;
 
-    String phoneNumber;
+    private String username;
 
-    String username;
+    private String password;
 
-    String password;
-
-    Set<RoleDto> role;
+    private Set<RoleDto> role;
 }

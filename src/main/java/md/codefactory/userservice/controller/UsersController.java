@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -32,8 +33,8 @@ public class UsersController {
     @PostMapping
     public ResponseEntity<?> saveUser(@Valid @RequestBody NewUserDto newUserDto, BindingResult result) throws ProfileNotFountException, EntityAlreadyExistsException {
 
-        ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
-        if (errorMap != null) return errorMap;
+        Map<String, String> errorMap = mapValidationErrorService.mapValidationService(result);
+        if (errorMap != null) return ResponseEntity.badRequest().body(errorMap);
 
         User newUser = userMapper.newUserDtoToUser(newUserDto);
         usersServices.saveUser(newUser);
@@ -53,8 +54,9 @@ public class UsersController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserDto updateUserDto, BindingResult result) throws ProfileNotFountException, EntityAlreadyExistsException {
 
-        ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
-        if (errorMap != null) return errorMap;
+        Map<String, String> errorMap = mapValidationErrorService.mapValidationService(result);
+        if (errorMap != null) return ResponseEntity.badRequest().body(errorMap);
+
         User updateUser = userMapper.updateUserDtoToUser(updateUserDto);
         usersServices.updateUser(id, updateUser);
 

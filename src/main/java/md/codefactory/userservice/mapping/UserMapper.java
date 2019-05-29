@@ -22,7 +22,5 @@ public interface UserMapper {
 
     UserProfileDto userToUserProfileDto(User user);
 
-    User adminUserDtoToUser(AdminUserDto adminUserDto);
-
     AdminUserDto userToAdminUserDto(User user);
 }

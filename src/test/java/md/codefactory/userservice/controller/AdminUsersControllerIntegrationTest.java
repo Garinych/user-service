@@ -1,11 +1,8 @@
 package md.codefactory.userservice.controller;
 
-import md.codefactory.userservice.mapping.UserMapper;
-import md.codefactory.userservice.repository.UsersRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -29,12 +26,8 @@ public class AdminUsersControllerIntegrationTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    private UsersRepository usersRepository;
 
     private MockMvc mockMvc;
-
-    private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     @Before
     public void setUp() throws Exception {
@@ -42,15 +35,6 @@ public class AdminUsersControllerIntegrationTest {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build();
-    }
-
-    @Test
-    public void should_find_all_users() throws Exception {
-
-        this.mockMvc.perform(get("/api/admin/users")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
     }
 
     @Test

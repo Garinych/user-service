@@ -16,21 +16,21 @@ public class GlobalExceptionHandler {
     private String errorMessage = "errorMessage";
 
     @ExceptionHandler({EntityAlreadyExistsException.class})
-    public ResponseEntity<Map<String, String>> emailAlreadyExist(EntityAlreadyExistsException e) {
+    public ResponseEntity<Map<String, String>> entitylAlreadyExist(EntityAlreadyExistsException e) {
         Map<String, String> responce = new HashMap<>();
         responce.put(errorMessage, e.getMessage());
         return new ResponseEntity<>(responce, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler({ProfileNotFountException.class})
-    public ResponseEntity<Map<String, String>> emailAlreadyExist(ProfileNotFountException e) {
+    public ResponseEntity<Map<String, String>> profileNotFound(ProfileNotFountException e) {
         Map<String, String> responce = new HashMap<>();
         responce.put(errorMessage, e.getMessage());
         return new ResponseEntity<>(responce, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({NotEnoughtRightsException.class})
-    public ResponseEntity<Map<String, String>> emailAlreadyExist(NotEnoughtRightsException e) {
+    public ResponseEntity<Map<String, String>> notEnoughtRights(NotEnoughtRightsException e) {
         Map<String, String> responce = new HashMap<>();
         responce.put(errorMessage, e.getMessage());
         return new ResponseEntity<>(responce, HttpStatus.BAD_REQUEST);

@@ -1,11 +1,13 @@
 package md.codefactory.userservice.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import md.codefactory.userservice.domain.enums.RoleName;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+@EqualsAndHashCode(of = "name")//role name is unique
 @Data
 @Entity
 @Table(name = "roles")

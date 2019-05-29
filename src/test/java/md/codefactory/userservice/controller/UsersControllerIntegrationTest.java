@@ -4,7 +4,6 @@ import md.codefactory.userservice.domain.User;
 import md.codefactory.userservice.mapping.UserMapper;
 import md.codefactory.userservice.mapping.dto.NewUserDto;
 import md.codefactory.userservice.mapping.dto.UpdateUserDto;
-import md.codefactory.userservice.repository.UsersRepository;
 import md.codefactory.userservice.util.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,9 +31,6 @@ public class UsersControllerIntegrationTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
-
-    @Autowired
-    private UsersRepository usersRepository;
 
     private MockMvc mockMvc;
 
@@ -73,16 +69,41 @@ public class UsersControllerIntegrationTest {
         this.mockMvc.perform(get("/api/users/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void should_show_user_profile_not_found() throws Exception {
 
         this.mockMvc.perform(get("/api/users/{id}", -1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("errorMessage", is("User with id = -1 not found!")));
-
     }
 
     @Test
     public void should_update_user_profile() throws Exception {
+
+
+
+        this.mockMvc.perform(put("/api/users/{id}", 2)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtils.objectAsBytes(getUpdateUser())))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void should_update_user_with_exist_data() throws Exception{
+
+        this.mockMvc.perform(put("/api/users/{id}", 3)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtils.objectAsBytes(getUpdateUser())))
+                .andExpect(status().isConflict());
+
+    }
+
+    private static UpdateUserDto getUpdateUser() {
 
         UpdateUserDto updatedUser = new UpdateUserDto();
         updatedUser.setFirstName("Vasea");
@@ -92,17 +113,7 @@ public class UsersControllerIntegrationTest {
         updatedUser.setUsername("vsea2");
         updatedUser.setPassword("jora123");
 
-        this.mockMvc.perform(put("/api/users/{id}", 2)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(TestUtils.objectAsBytes(updatedUser)))
-                .andExpect(status().isOk());
-
-        this.mockMvc.perform(put("/api/users/{id}", 3)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(TestUtils.objectAsBytes(updatedUser)))
-                .andExpect(status().isConflict());
+        return updatedUser;
 
     }
 
