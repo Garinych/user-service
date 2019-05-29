@@ -7,15 +7,15 @@ import lombok.Setter;
 @Setter
 public class UserProfileDto {
 
-    String firstName;
+    private String firstName;
 
-    String lastName;
+    private String lastName;
 
-    String email;
+    private String email;
 
-    String phoneNumber;
+    private String phoneNumber;
 
-    String username;
+    private String username;
 
-    String password;
+    private String password;
 }

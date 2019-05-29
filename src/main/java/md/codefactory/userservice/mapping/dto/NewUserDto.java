@@ -15,26 +15,26 @@ public class NewUserDto {
     @NotBlank
     @Size(min = 3, max = 20, message = "First name length mast be min - 3 , max - 20 !")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contains only letters")
-    String firstName;
+    private String firstName;
 
     @NotBlank
     @Size(min = 3, max = 20, message = "Last name length mast be min - 3 , max - 20 !")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contains only letters")
-    String lastName;
+    private String lastName;
 
     @NotBlank
     @Email
-    String email;
+    private String email;
 
     @NotBlank
     @Size(min = 9, max = 20, message = "Phone number size mast be min - 9, max - 20 and contains only Numbers !")
-    String phoneNumber;
+    private String phoneNumber;
 
     @NotBlank
     @Size(min = 5, max = 20, message = "Username length mast be min - 5 , max - 20 !")
-    String username;
+    private String username;
 
     @NotBlank
-    String password;
+    private String password;
 
 }
